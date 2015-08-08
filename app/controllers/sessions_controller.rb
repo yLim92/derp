@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       remember(user) if params[:session][:remember_me] == "1"
-      redirect_to user
+      redirect_back_or(user)
     else
       flash.now[:danger] = "You suck"
       render 'new'
