@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :password_reset_token
   
   before_save :downcase_email
   before_create :create_activation_digest
@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
   end
+  
   
   private
     def create_activation_digest
